@@ -1,0 +1,170 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 21 min SDK version: x86",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -7431208
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON /Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86/android_gradle_build.json due to:",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 4243800
+  },
+  {
+    "level_": 0,
+    "message_": "- a file changed",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -687899062
+  },
+  {
+    "level_": 0,
+    "message_": "  - /Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86/build.ninja (LAST_MODIFIED_CHANGED)",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1425291001
+  },
+  {
+    "level_": 0,
+    "message_": "  - /Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86/compile_commands.json (LAST_MODIFIED_CHANGED)",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1411285905
+  },
+  {
+    "level_": 0,
+    "message_": "keeping json folder \u0027/Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86\u0027 but regenerating project",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1211546821
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake /Users/vkas/Library/Android/sdk/cmake/3.22.1/bin/cmake \\\n  -H/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d21 \\\n  -DANDROID_PLATFORM\u003dandroid-21 \\\n  -DANDROID_ABI\u003dx86 \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003dx86 \\\n  -DANDROID_NDK\u003d/Users/vkas/Library/Android/sdk/ndk/26.1.10909125 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/vkas/Library/Android/sdk/ndk/26.1.10909125 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/vkas/Library/Android/sdk/ndk/26.1.10909125/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/vkas/Library/Android/sdk/cmake/3.22.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/vkas/vpn/SecureVPNProxySuperVPN/open/build/intermediates/cxx/Debug/6i5h1916/obj/x86 \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/vkas/vpn/SecureVPNProxySuperVPN/open/build/intermediates/cxx/Debug/6i5h1916/obj/x86 \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86 \\\n  -GNinja\n",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1967134112
+  },
+  {
+    "level_": 0,
+    "message_": "/Users/vkas/Library/Android/sdk/cmake/3.22.1/bin/cmake \\\n  -H/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d21 \\\n  -DANDROID_PLATFORM\u003dandroid-21 \\\n  -DANDROID_ABI\u003dx86 \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003dx86 \\\n  -DANDROID_NDK\u003d/Users/vkas/Library/Android/sdk/ndk/26.1.10909125 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/vkas/Library/Android/sdk/ndk/26.1.10909125 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/vkas/Library/Android/sdk/ndk/26.1.10909125/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/vkas/Library/Android/sdk/cmake/3.22.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/vkas/vpn/SecureVPNProxySuperVPN/open/build/intermediates/cxx/Debug/6i5h1916/obj/x86 \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/vkas/vpn/SecureVPNProxySuperVPN/open/build/intermediates/cxx/Debug/6i5h1916/obj/x86 \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86 \\\n  -GNinja\n",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1328776609
+  },
+  {
+    "level_": 0,
+    "message_": "Exiting generation of /Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86/compile_commands.json.bin normally",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -77650070
+  },
+  {
+    "level_": 0,
+    "message_": "done executing cmake",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 2141352169
+  },
+  {
+    "level_": 0,
+    "message_": "hard linked /Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/Debug/6i5h1916/x86/compile_commands.json to /Users/vkas/vpn/SecureVPNProxySuperVPN/open/.cxx/tools/skeletonOvpn23Debug/x86/compile_commands.json",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -737496118
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "/Users/vkas/vpn/SecureVPNProxySuperVPN/open/src/main/cpp/CMakeLists.txt",
+    "tag_": "skeletonOvpn23Debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -215542043
+  }
+]
