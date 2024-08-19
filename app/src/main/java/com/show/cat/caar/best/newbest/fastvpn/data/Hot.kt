@@ -175,7 +175,10 @@ object Hot {
         val serviceString = preference.getStringpreference(KeyAppFun.o_service_data)
         val vpnAllListBean = Gson().fromJson(serviceString, VpnServicesBean::class.java)
         if (vpnAllListBean != null && vpnAllListBean.data != null && vpnAllListBean.data.Tauosj.isNotEmpty()) {
-            val vpnBean: ServiceData = vpnAllListBean.data.Tauosj.random()
+            val filteredServices = vpnAllListBean.data.Tauosj.filter { serviceData ->
+                serviceData.mYeZDkXHm == "open"
+            }
+            val vpnBean: ServiceData = filteredServices.random()
             preference.setStringpreference(KeyAppFun.l_service_best_data, Gson().toJson(vpnBean))
         }
     }
@@ -193,10 +196,11 @@ object Hot {
                 bestData = preference.getStringpreference(KeyAppFun.l_service_best_data)
             }
             val vpnBeatBean = Gson().fromJson(bestData, ServiceData::class.java)
-            val list: MutableList<ServiceData> =
-                vpnAllListBean.data.MINgqPeL as MutableList<ServiceData>
-            list.add(0, vpnBeatBean)
-            return list
+            val filteredServices = vpnAllListBean.data.Tauosj.filter { serviceData ->
+                serviceData.mYeZDkXHm == "open"
+            }.toMutableList()
+            filteredServices.add(0, vpnBeatBean)
+            return filteredServices
         } catch (e: Exception) {
             return null
         }
