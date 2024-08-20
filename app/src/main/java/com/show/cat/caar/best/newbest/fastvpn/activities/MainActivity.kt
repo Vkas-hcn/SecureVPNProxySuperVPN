@@ -257,20 +257,7 @@ class MainActivity : UIActivity() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU && Hot.vpnStateHotData != VpnStateData.CONNECTED) {
             postPointData("super5")
         }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                clickButTOVpn()
-            } else {
-                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                Toast.makeText(
-                    this,
-                    "Android 14 devices require notification permissions for VPN service usage",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        } else {
-            clickButTOVpn()
-        }
+        clickButTOVpn()
     }
 
     private fun checkVPNPermission(): Boolean {
@@ -323,13 +310,10 @@ class MainActivity : UIActivity() {
 
     override fun onStop() {
         super.onStop()
-        Log.e(TAG, "onStop: 1")
         if (vpnStateMi == VpnStateData.CONNECTING && Hot.vpnStateHotData != VpnStateData.CONNECTED) {
-            Log.e(TAG, "onStop: 2")
             stopDisConnectFun()
         }
         if (vpnStateMi == VpnStateData.DISCONNECTING && Hot.vpnStateHotData != VpnStateData.DISCONNECTED) {
-            Log.e(TAG, "onStop: 3")
             stopDisConnectFun()
         }
     }
@@ -386,7 +370,7 @@ class MainActivity : UIActivity() {
             when (state) {
                 "CONNECTED" -> {
                     Log.e(TAG, "VPN连接成功=${vpnStateMi}")
-                    if(!killAppState){
+                    if (!killAppState) {
                         Log.e(TAG, "同步UI=${vpnStateMi}")
                         updateUI(Hot.vpnStateHotData)
                     }
@@ -553,20 +537,16 @@ class MainActivity : UIActivity() {
             preference.setStringpreference(KeyAppFun.tba_vpn_ip_type, clickBean.DCzDBHwKl)
             preference.setStringpreference(KeyAppFun.tba_vpn_name_type, clickBean.RLhLoQLm)
             runCatching {
-                val conf = this@MainActivity.assets.open("fast_ippooltest.ovpn")
+                val conf = this@MainActivity.assets.open("fast_265.ovpn")
                 val br = BufferedReader(InputStreamReader(conf))
                 val config = StringBuilder()
                 var line: String?
                 while (true) {
                     line = br.readLine()
                     if (line == null) break
-//                        if (line.contains("remote 195", true)) {
-//                            line = "remote ${clickBean.DCzDBHwKl} ${clickBean.eOEwSU}"
-//                        } else if (line.contains("wrongpassword", true)) {
-//                            line = clickBean.SIt
-//                        } else if (line.contains("cipher AES-256-GCM", true)) {
-//                            line = "cipher ${clickBean.oquHb}"
-//                        }
+                    if (line.contains("remote 195", true)) {
+                        line = "remote ${clickBean.DCzDBHwKl} ${clickBean.eOEwSU}"
+                    }
                     config.append(line).append("\n")
                 }
                 Log.e("TAG", "openVTool: $config")

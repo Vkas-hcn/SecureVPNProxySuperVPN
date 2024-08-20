@@ -344,12 +344,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         int notificationId = channel.hashCode();
 
         mNotificationManager.notify(notificationId, notification);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            startForeground(notificationId, notification, FOREGROUND_SERVICE_TYPE_DATA_SYNC);
-        } else {
-            startForeground(notificationId, notification);
-        }
-
+        startForeground(notificationId, notification);
         if (lastChannel != null && !channel.equals(lastChannel)) {
             // Cancel old notification
             mNotificationManager.cancel(lastChannel.hashCode());
@@ -1117,7 +1112,6 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
             VpnStatus.logDebug("Apps may bypass VPN");
         }
     }
-
 
 
     public void addDNS(String dns) {
