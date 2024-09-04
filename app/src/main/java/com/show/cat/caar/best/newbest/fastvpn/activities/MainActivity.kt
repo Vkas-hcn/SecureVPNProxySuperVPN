@@ -82,7 +82,6 @@ class MainActivity : UIActivity() {
         liveVpnState()
         imageRotator = ImageRotator()
         backFun()
-        showHomeAd()
         showDueDialog()
         MainApp.saveLoadManager.encode(
             KeyAppFun.easy_vpn_flow_data, AdUtils.getIsOrNotRl(preference)
@@ -303,6 +302,7 @@ class MainActivity : UIActivity() {
             delay(300)
             val state = lifecycle.currentState == Lifecycle.State.RESUMED
             if (state) {
+                showHomeAd()
                 postPointData("super2")
             }
         }
@@ -370,11 +370,16 @@ class MainActivity : UIActivity() {
             when (state) {
                 "CONNECTED" -> {
                     Log.e(TAG, "VPN连接成功=${vpnStateMi}")
+
                     if (!killAppState) {
                         Log.e(TAG, "同步UI=${vpnStateMi}")
                         updateUI(Hot.vpnStateHotData)
                     }
                     setVpnStateData(VpnStateData.CONNECTED)
+                    MainApp.adManager.loadAd(KeyAppFun.cont_type)
+                    MainApp.adManager.loadAd(KeyAppFun.ba_type)
+                    MainApp.adManager.loadAd(KeyAppFun.result_type)
+                    MainApp.adManager.loadAd(KeyAppFun.home_type)
                     if (vpnStateMi == VpnStateData.CONNECTING) {
                         showConnectAd {
                             lifecycleScope.launch {
@@ -383,8 +388,6 @@ class MainActivity : UIActivity() {
                                 updateUI(Hot.vpnStateHotData)
                             }
                         }
-                        MainApp.adManager.loadAd(KeyAppFun.ba_type)
-                        MainApp.adManager.loadAd(KeyAppFun.result_type)
                     }
                     super10()
                 }
@@ -534,6 +537,19 @@ class MainActivity : UIActivity() {
         MainScope().launch(Dispatchers.IO) {
             val serviceString = preference.getStringpreference(KeyAppFun.l_service_now_data)
             val clickBean = Gson().fromJson(serviceString, ServiceData::class.java)
+            Log.e(TAG, "openVTool: 存储=${MainApp.adManager.loadNowIp}")
+            Log.e(TAG, "openVTool: 现在=${clickBean.DCzDBHwKl}")
+
+            if(MainApp.adManager.loadNowIp!=clickBean.DCzDBHwKl){
+                Log.e(TAG, "openVTool: 清除所有广告")
+                MainApp.adManager.qcAd(KeyAppFun.open_type)
+                MainApp.adManager.qcAd(KeyAppFun.home_type)
+                MainApp.adManager.qcAd(KeyAppFun.result_type)
+                MainApp.adManager.qcAd(KeyAppFun.cont_type)
+                MainApp.adManager.qcAd(KeyAppFun.list_type)
+                MainApp.adManager.qcAd(KeyAppFun.ba_type)
+            }
+
             preference.setStringpreference(KeyAppFun.tba_vpn_ip_type, clickBean.DCzDBHwKl)
             preference.setStringpreference(KeyAppFun.tba_vpn_name_type, clickBean.RLhLoQLm)
             runCatching {
@@ -637,9 +653,10 @@ class MainActivity : UIActivity() {
             return
         }
         jobMainJdo = lifecycleScope.launch {
-            delay(300)
             while (isActive) {
                 if (MainApp.adManager.canShowAd(KeyAppFun.home_type) == KeyAppFun.ad_show) {
+                    img_oc_ad?.isVisible = false
+                    ad_layout_admob?.isVisible = true
                     MainApp.adManager.showAd(KeyAppFun.home_type, this@MainActivity) {}
                     jobMainJdo?.cancel()
                     jobMainJdo = null

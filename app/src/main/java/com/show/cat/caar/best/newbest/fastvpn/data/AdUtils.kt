@@ -78,10 +78,11 @@ object AdUtils {
         }
     }
 
+
     fun getAdBlackData(preference: Preference): Boolean {
         val state = when (getLjData(preference).ccc_kk) {
             "1" -> {
-                preference.getStringpreference(KeyAppFun.cloak_data) != "grady"
+                true
             }
 
             "2" -> {
