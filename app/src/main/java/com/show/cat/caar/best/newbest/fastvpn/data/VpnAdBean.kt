@@ -31,4 +31,5 @@ data class AdEasy(
 data class AdLjBean(
     val ccc_kk: String,
     val rrr_ll: String,
+    val hhh_ss:String,
 )
