@@ -88,7 +88,6 @@ class SplashActivity : BaseActivity() {
             clickEuAdState()
         }
         UpDataUtils.postSessionData()
-        haveRefData(this)
         onBackPressedDispatcher.addCallback(this) {
         }
 

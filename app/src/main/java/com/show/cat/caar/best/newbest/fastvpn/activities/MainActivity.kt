@@ -157,14 +157,14 @@ class MainActivity : UIActivity() {
     }
 
     private fun showDueDialog(): Boolean {
-//        if (RetrofitClient.shouldBlockAccess(preference)) {
-//            Hot.illegalUserDialog(this) {
-//                moveTaskToBack(true)
-//                Process.killProcess(Process.myPid())
-//                finish()
-//            }
-//            return true
-//        }
+        if (RetrofitClient.shouldBlockAccess(preference)) {
+            Hot.illegalUserDialog(this) {
+                moveTaskToBack(true)
+                Process.killProcess(Process.myPid())
+                finish()
+            }
+            return true
+        }
         return false
     }
 
@@ -627,6 +627,11 @@ class MainActivity : UIActivity() {
         jobMainJdo?.cancel()
         jobMainJdo = null
         if (AdUtils.getAdBlackData(preference)) {
+            ad_layout?.isVisible = false
+            return
+        }
+        val userData = AdUtils.blockAdUsers()
+        if (!userData) {
             ad_layout?.isVisible = false
             return
         }

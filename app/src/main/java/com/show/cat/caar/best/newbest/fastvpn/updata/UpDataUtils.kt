@@ -43,6 +43,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+
 object UpDataUtils {
     private var tbaUrl =
         if (BuildConfig.DEBUG) "https://test-messiah.supervpnfreetouchvpn.com/glisten/oberlin/cony" else "https://messiah.supervpnfreetouchvpn.com/belly/runaway"
@@ -415,10 +416,12 @@ object UpDataUtils {
             KeyAppFun.easy_vpn_flow_data, AdUtils.getIsOrNotRl(preference)
         )
         if (Hot.vpnStateHotData == VpnStateData.CONNECTED && !ss_data) {
-            ufDetailBean.maxx_load_ip = preference.getStringpreference(KeyAppFun.tba_vpn_ip_type).toString()
-            ufDetailBean.maxx_load_city =preference.getStringpreference(KeyAppFun.tba_vpn_name_type).toString()
+            ufDetailBean.maxx_load_ip =
+                preference.getStringpreference(KeyAppFun.tba_vpn_ip_type).toString()
+            ufDetailBean.maxx_load_city =
+                preference.getStringpreference(KeyAppFun.tba_vpn_name_type).toString()
         } else {
-            ufDetailBean.maxx_load_ip =preference.getStringpreference(KeyAppFun.ip_data).toString()
+            ufDetailBean.maxx_load_ip = preference.getStringpreference(KeyAppFun.ip_data).toString()
             ufDetailBean.maxx_load_city = "null"
         }
 
@@ -434,9 +437,10 @@ object UpDataUtils {
         if (Hot.vpnStateHotData == VpnStateData.CONNECTED && !ss_data) {
             ufDetailBean.maxx_show_ip =
                 preference.getStringpreference(KeyAppFun.tba_vpn_ip_type).toString()
-            ufDetailBean.maxx_show_city =preference.getStringpreference(KeyAppFun.tba_vpn_name_type).toString()
+            ufDetailBean.maxx_show_city =
+                preference.getStringpreference(KeyAppFun.tba_vpn_name_type).toString()
         } else {
-            ufDetailBean.maxx_show_ip =preference.getStringpreference(KeyAppFun.ip_data).toString()
+            ufDetailBean.maxx_show_ip = preference.getStringpreference(KeyAppFun.ip_data).toString()
             ufDetailBean.maxx_show_city = "null"
         }
 
@@ -464,12 +468,29 @@ object UpDataUtils {
     }
 
     fun haveRefData(context: Context) {
+        var installReferrer = ""
+        var preference = Preference(MainApp.context)
+        val referrer = preference.getStringpreference(KeyAppFun.ref_data)
+        if (referrer.isNotBlank()) {
+            return
+        }
+        val date = System.currentTimeMillis()
+
+//        installReferrer = "not%20set"
+        installReferrer = "fb4a"
+        preference.setStringpreference(KeyAppFun.ref_data,installReferrer)
         runCatching {
             val referrerClient = InstallReferrerClient.newBuilder(context).build()
             referrerClient.startConnection(object : InstallReferrerStateListener {
                 override fun onInstallReferrerSetupFinished(p0: Int) {
                     when (p0) {
                         InstallReferrerClient.InstallReferrerResponse.OK -> {
+                            val installReferrer =
+                                referrerClient.installReferrer.installReferrer ?: ""
+
+//                            preference.setStringpreference(KeyAppFun.ref_data,installReferrer)
+                            Log.e("TAG", "onInstallReferrerSetupFinished: ${installReferrer}")
+
                             runCatching {
                                 referrerClient?.installReferrer?.run {
                                     postInstallData(context, this)
@@ -488,10 +509,9 @@ object UpDataUtils {
     }
 
 
-
-
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork ?: return false
             val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
@@ -508,8 +528,6 @@ object UpDataUtils {
             return networkInfo.isConnected
         }
     }
-
-
 
 
     fun super10() {

@@ -93,6 +93,11 @@ class AdManager(private val application: Application) {
             Log.e("TAG", "广告超限，不在加载")
             return
         }
+        val userData = AdUtils.blockAdUsers()
+        if (!userData && ( adType == KeyAppFun.ba_type ||  adType == KeyAppFun.home_type || adType == KeyAppFun.cont_type)) {
+            Log.e("TAG", "买量屏蔽$adType 广告，不在加载: ")
+            return
+        }
         val blackData = AdUtils.getAdBlackData(preference)
         if (blackData && (adType == KeyAppFun.home_type || adType == KeyAppFun.cont_type || adType == KeyAppFun.list_type || adType == KeyAppFun.ba_type)) {
             Log.e("TAG", "黑名单屏蔽$adType 广告，不在加载: ")
@@ -362,6 +367,11 @@ class AdManager(private val application: Application) {
 
     fun canShowAd(adType: String): String {
         val ad = adCache[adType]
+        val userData = AdUtils.blockAdUsers()
+        if (!userData && ( adType == KeyAppFun.ba_type ||  adType == KeyAppFun.home_type || adType == KeyAppFun.cont_type)) {
+            Log.e("TAG", "买量屏蔽$adType 广告，不在加载: ")
+            return KeyAppFun.ad_jump_over
+        }
         val blackData = AdUtils.getAdBlackData(preference)
         if (blackData && (adType == KeyAppFun.home_type || adType == KeyAppFun.cont_type || adType == KeyAppFun.list_type || adType == KeyAppFun.ba_type)) {
             return KeyAppFun.ad_jump_over
@@ -463,6 +473,12 @@ class AdManager(private val application: Application) {
                 val state = activity.lifecycle.currentState == Lifecycle.State.RESUMED
 
                 if (state) {
+                    val userData = AdUtils.blockAdUsers()
+                    if (!userData) {
+                        Log.e("TAG", "买量屏蔽Home 广告: ")
+                        activity.ad_layout?.isVisible = false
+                        return@let
+                    }
                     val blackData = AdUtils.getAdBlackData(preference)
                     if (blackData) {
                         Log.e("TAG", "黑名单屏蔽Home广告")

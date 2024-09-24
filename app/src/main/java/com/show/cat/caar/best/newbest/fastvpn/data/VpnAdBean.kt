@@ -29,6 +29,18 @@ data class AdEasy(
 
 @Keep
 data class AdLjBean(
+    val aaa_zz:String,
     val ccc_kk: String,
     val rrr_ll: String,
+)
+
+@Keep
+data class FlashUserBean(
+    val ass: String,
+    val xc: String,
+    val vb: String,
+    val gk: String,
+    val nm: String,
+    val io: String,
+    val we: String
 )

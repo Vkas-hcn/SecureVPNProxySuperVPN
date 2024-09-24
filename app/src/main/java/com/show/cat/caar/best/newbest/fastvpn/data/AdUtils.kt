@@ -72,6 +72,10 @@ object AdUtils {
                 return false
             }
 
+            "3" -> {
+                return !isItABuyingUser()
+            }
+
             else -> {
                 return true
             }
@@ -98,5 +102,63 @@ object AdUtils {
             preference.setStringpreference(KeyAppFun.black_updata_state, "1")
         }
         return state
+    }
+    private fun getUserJson(): FlashUserBean {
+        val preference = Preference(MainApp.context)
+        val adRefBean = preference.getStringpreference(KeyAppFun.o_ml_data)
+        val localAdBean = MainApp.context.loadJsonFromAssets("ref_model.json")
+        runCatching {
+            if (adRefBean.isNotEmpty()) {
+                return Gson().fromJson(base64Decode(adRefBean), FlashUserBean::class.java)
+            } else {
+                return Gson().fromJson(localAdBean, FlashUserBean::class.java)
+            }
+        }.getOrNull() ?: return Gson().fromJson(localAdBean, FlashUserBean::class.java)
+    }
+    private fun isFacebookUser(): Boolean {
+        var preference = Preference(MainApp.context)
+        val data = getUserJson()
+        val referrer = preference.getStringpreference(KeyAppFun.ref_data)
+        val pattern = "fb4a|facebook".toRegex(RegexOption.IGNORE_CASE)
+        return (pattern.containsMatchIn(referrer) && data.ass == "1")
+    }
+
+    fun isItABuyingUser(): Boolean {
+        val preference = Preference(MainApp.context)
+        val data = getUserJson()
+        val referrer = preference.getStringpreference(KeyAppFun.ref_data)
+        return isFacebookUser()
+                || (data.xc == "1" && referrer.contains("gclid", true))
+                || (data.vb == "1" && referrer.contains("not%20set", true))
+                || (data.gk == "1" && referrer.contains(
+            "youtubeads",
+            true
+        ))
+                || (data.nm == "1" && referrer.contains("%7B%22", true))
+                || (data.io == "1" && referrer.contains("adjust", true))
+                || (data.we == "1" && referrer.contains("bytedance", true))
+    }
+
+    fun blockAdUsers(): Boolean {
+        val preference = Preference(MainApp.context)
+
+        val data = getLjData(preference).aaa_zz
+        when (data) {
+            "1" -> {
+                return true
+            }
+
+            "2" -> {
+                return isItABuyingUser()
+            }
+
+            "3" -> {
+                return false
+            }
+
+            else -> {
+                return true
+            }
+        }
     }
 }

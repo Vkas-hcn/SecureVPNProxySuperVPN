@@ -32,7 +32,7 @@ object KeyAppFun {
     const val ip_data = "ip_data"
 
 
-//    const val ref_data = "ref_data"
+    const val ref_data = "ref_data"
 
     const val cloak_data = "cloak_data"
 

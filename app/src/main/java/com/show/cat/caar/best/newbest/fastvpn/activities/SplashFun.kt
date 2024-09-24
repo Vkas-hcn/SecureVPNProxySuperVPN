@@ -19,22 +19,26 @@ object SplashFun {
         var isCa = false
         var attemptCount = 0
         val preference = Preference(context)
-//        val auth = Firebase.remoteConfig
-//        auth.fetchAndActivate().addOnSuccessListener {
-//            preference.setStringpreference(
-//                KeyAppFun.o_ad_data,
-//                auth.getString(KeyAppFun.o_ad_data)
-//            )
-//            preference.setStringpreference(
-//                KeyAppFun.o_ml_data,
-//                auth.getString(KeyAppFun.o_ml_data)
-//            )
-//            preference.setStringpreference(
-//                KeyAppFun.o_me_data,
-//                auth.getString(KeyAppFun.o_me_data)
-//            )
-//            isCa = true
-//        }
+        val auth = Firebase.remoteConfig
+        auth.fetchAndActivate().addOnSuccessListener {
+            preference.setStringpreference(
+                KeyAppFun.o_ad_data,
+                auth.getString(KeyAppFun.o_ad_data)
+            )
+            preference.setStringpreference(
+                KeyAppFun.o_ml_data,
+                auth.getString(KeyAppFun.o_ml_data)
+            )
+            preference.setStringpreference(
+                KeyAppFun.o_me_data,
+                auth.getString(KeyAppFun.o_me_data)
+            )
+            Log.e("TAG", "getFirebaseDataFun1: ${auth.getString(KeyAppFun.o_ad_data)}", )
+            Log.e("TAG", "getFirebaseDataFun2: ${auth.getString(KeyAppFun.o_ml_data)}", )
+            Log.e("TAG", "getFirebaseDataFun2: ${auth.getString(KeyAppFun.o_me_data)}", )
+
+            isCa = true
+        }
         Log.e("TAG", "开始检测远程数据")
 
         val checkConditionAndPreloadAd = object : Runnable {

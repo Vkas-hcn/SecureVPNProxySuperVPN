@@ -10,10 +10,20 @@ import com.show.cat.caar.best.newbest.fastvpn.activities.MainActivity
 import com.tencent.mmkv.MMKV
 import com.show.cat.caar.best.newbest.fastvpn.data.Hot.isMainProcess
 import com.show.cat.caar.best.newbest.fastvpn.data.Hot.registerAppLifeCallback
+import com.show.cat.caar.best.newbest.fastvpn.data.KeyAppFun
+import com.show.cat.caar.best.newbest.fastvpn.updata.UpDataUtils
 import com.show.cat.caar.best.newbest.fastvpn.utils.AdManager
 import com.show.cat.caar.best.newbest.fastvpn.utils.GlobalTimer
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 class MainApp : Application() {
+    var referJobFlash: Job? = null
+
     override fun onCreate() {
         super.onCreate()
         Firebase.initialize(this)
@@ -25,6 +35,24 @@ class MainApp : Application() {
             adManager = AdManager(this)
             registerAppLifeCallback(this)
             globalTimer = GlobalTimer()
+            getReferInformation(this)
+        }
+    }
+    private fun getReferInformation(context: Context) {
+        referJobFlash?.cancel()
+        var preference = Preference(MainApp.context)
+        val ref = preference.getStringpreference(KeyAppFun.ref_data)
+
+        referJobFlash = GlobalScope.launch {
+            while (isActive) {
+                if (ref.isNullOrEmpty()) {
+                    UpDataUtils.haveRefData(context)
+                } else {
+                    cancel()
+                    referJobFlash = null
+                }
+                delay(5000)
+            }
         }
     }
     fun initHydraSdk() {
