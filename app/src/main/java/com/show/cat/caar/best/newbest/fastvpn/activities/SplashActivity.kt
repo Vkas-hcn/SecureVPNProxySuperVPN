@@ -82,6 +82,7 @@ class SplashActivity : BaseActivity() {
         }
         updateUserOpinions()
         getFirebaseDataFun(this) {
+            SplashFun.initFaceBook(preference!!)
             MainApp.adManager.loadAd(KeyAppFun.open_type)
             MainApp.adManager.loadAd(KeyAppFun.cont_type)
             MainApp.adManager.loadAd(KeyAppFun.home_type)

@@ -25,8 +25,10 @@ import com.show.cat.caar.best.newbest.fastvpn.activities.EndActivity
 import com.show.cat.caar.best.newbest.fastvpn.activities.MainActivity
 import com.show.cat.caar.best.newbest.fastvpn.data.AdEasy
 import com.show.cat.caar.best.newbest.fastvpn.data.AdUtils
+import com.show.cat.caar.best.newbest.fastvpn.data.Hot
 import com.show.cat.caar.best.newbest.fastvpn.data.KeyAppFun
 import com.show.cat.caar.best.newbest.fastvpn.data.VpnAdBean
+import com.show.cat.caar.best.newbest.fastvpn.data.VpnStateData
 import com.show.cat.caar.best.newbest.fastvpn.updata.UpDataUtils
 import com.show.cat.caar.best.newbest.fastvpn.updata.UpDataUtils.super17
 import kotlinx.coroutines.Dispatchers
@@ -47,9 +49,10 @@ class AdManager(private val application: Application) {
     private var adDataList: AdEasy? = null
     private var adDataBa: AdEasy? = null
 
+    var loadNowIp: String? = null
+
     init {
         resetCountsIfNeeded()
-        Log.e("TAG", ":adManager 11111111111111")
     }
 
     private fun canRequestAd(adType: String): Boolean {
@@ -59,6 +62,13 @@ class AdManager(private val application: Application) {
     }
 
     fun loadAd(adType: String) {
+        val ss_data = MainApp.saveLoadManager.decodeBool(
+            KeyAppFun.easy_vpn_flow_data, AdUtils.getIsOrNotRl(preference)
+        )
+        if (Hot.vpnStateHotData != VpnStateData.CONNECTED || ss_data) {
+            Log.e("TAG", "未连接或扰流-$adType 广告，不加载: ")
+            return
+        }
         adAllData = AdUtils.getAdListData(preference)
         if (adLoadInProgress[adType] == true) return
         adLoadInProgress[adType] = true
@@ -74,13 +84,20 @@ class AdManager(private val application: Application) {
             }.sortedByDescending { it.easy_no }
 
             loadAdFromList(adType, adList, 0)
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
         }
 
     }
 
     private fun loadAdFromList(adType: String, adList: List<AdEasy>, index: Int) {
+        val ss_data = MainApp.saveLoadManager.decodeBool(
+            KeyAppFun.easy_vpn_flow_data, AdUtils.getIsOrNotRl(preference)
+        )
+        if (Hot.vpnStateHotData != VpnStateData.CONNECTED || ss_data) {
+            Log.e("TAG", "未连接或扰流-$adType 广告，不加载: ")
+            return
+        }
         if (index >= adList.size) {
             adLoadInProgress[adType] = false
             return
@@ -107,6 +124,8 @@ class AdManager(private val application: Application) {
         val adEasy = adList[index]
         UpDataUtils.super14(adType)
         Log.e("TAG", "$adType 广告，开始加载: id=${adEasy.easy_isd};we=${adEasy.easy_no}")
+        loadNowIp = preference.getStringpreference(KeyAppFun.tba_vpn_ip_type)
+        Log.e("TAG", "load Ad ip=$loadNowIp")
         when (adEasy.easy_ty) {
             "open" -> loadOpenAd(adType, adEasy, adList, index)
             "native" -> loadNativeAd(adType, adEasy, adList, index)
@@ -156,9 +175,9 @@ class AdManager(private val application: Application) {
                     adDataHome!!,
                     adType
                 )
+                loadAd(KeyAppFun.home_type)
                 UpDataUtils.toPointAdQTV(adValue, ad.responseInfo)
             }
-            loadAd(KeyAppFun.home_type)
         } else {
             ad.setOnPaidEventListener { adValue ->
                 Log.e("TAG", "原生广告 -${adType}，开始上报: ")
@@ -168,9 +187,9 @@ class AdManager(private val application: Application) {
                     adDataResult!!,
                     adType
                 )
+                loadAd(KeyAppFun.result_type)
                 UpDataUtils.toPointAdQTV(adValue, ad.responseInfo)
             }
-            loadAd(KeyAppFun.result_type)
         }
     }
 
@@ -366,6 +385,23 @@ class AdManager(private val application: Application) {
     }
 
     fun canShowAd(adType: String): String {
+        val maxxLoadIp = when (adType) {
+            KeyAppFun.open_type -> adDataOpen?.maxx_load_ip
+            KeyAppFun.home_type -> adDataHome?.maxx_load_ip
+            KeyAppFun.result_type -> adDataResult?.maxx_load_ip
+            KeyAppFun.cont_type -> adDataCont?.maxx_load_ip
+            KeyAppFun.list_type -> adDataList?.maxx_load_ip
+            KeyAppFun.ba_type -> adDataBa?.maxx_load_ip
+            else -> ""
+        }
+        val ss_data = MainApp.saveLoadManager.decodeBool(
+            KeyAppFun.easy_vpn_flow_data, AdUtils.getIsOrNotRl(preference)
+        )
+
+        if (maxxLoadIp != preference.getStringpreference(KeyAppFun.tba_vpn_ip_type) || Hot.vpnStateHotData != VpnStateData.CONNECTED || ss_data) {
+            return KeyAppFun.ad_jump_over
+        }
+
         val ad = adCache[adType]
         val userData = AdUtils.blockAdUsers()
         if (!userData && ( adType == KeyAppFun.ba_type ||  adType == KeyAppFun.home_type || adType == KeyAppFun.cont_type)) {
@@ -507,6 +543,7 @@ class AdManager(private val application: Application) {
                     adCache.remove(KeyAppFun.home_type)
                     adLoadInProgress[KeyAppFun.home_type] = false
                     adDataHome = UpDataUtils.afterLoadQTV(adDataHome!!)
+                    Hot.isRefHomeAd = false
                 }
             }
         }

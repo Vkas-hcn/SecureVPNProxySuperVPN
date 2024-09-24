@@ -5,14 +5,27 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.show.cat.caar.best.newbest.fastvpn.MainApp
 import com.show.cat.caar.best.newbest.fastvpn.Preference
+import com.show.cat.caar.best.newbest.fastvpn.data.AdUtils.getLjData
 import com.show.cat.caar.best.newbest.fastvpn.data.KeyAppFun
 
 object SplashFun {
     var adShown = false // Flag to indicate if the ad has been shown
+    fun initFaceBook(preference: Preference) {
+        val bean = getLjData(preference)
+        Log.e("TAG", "initFaceBook: ${bean.hhh_ss}")
+        if (bean.hhh_ss == null || bean.hhh_ss.isBlank()) {
+            return
+        }
+        FacebookSdk.setApplicationId(bean.hhh_ss)
+        FacebookSdk.sdkInitialize(MainApp.context)
+        AppEventsLogger.activateApp(MainApp.appli)
+    }
 
     fun getFirebaseDataFun(context: Context, loadAdFun: () -> Unit) {
         val handler = Handler(Looper.getMainLooper())
@@ -33,11 +46,10 @@ object SplashFun {
                 KeyAppFun.o_me_data,
                 auth.getString(KeyAppFun.o_me_data)
             )
-            Log.e("TAG", "getFirebaseDataFun1: ${auth.getString(KeyAppFun.o_ad_data)}", )
-            Log.e("TAG", "getFirebaseDataFun2: ${auth.getString(KeyAppFun.o_ml_data)}", )
-            Log.e("TAG", "getFirebaseDataFun2: ${auth.getString(KeyAppFun.o_me_data)}", )
-
             isCa = true
+        }.addOnFailureListener {
+            Log.e("TAG", "getFirebaseDataFun: $it")
+            getFirebaseDataFun(context, loadAdFun)
         }
         Log.e("TAG", "开始检测远程数据")
 

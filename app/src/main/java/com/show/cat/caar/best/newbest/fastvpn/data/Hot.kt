@@ -51,12 +51,12 @@ object Hot {
     private var backgroundJob: Job? = null
     private var needExecBackgroundTask = false
     private val backgroundTasks = mutableSetOf<Runnable>()
-     lateinit var mainToListResultIntent: ActivityResultLauncher<Intent>
+    lateinit var mainToListResultIntent: ActivityResultLauncher<Intent>
     var vpnStateHotData = VpnStateData.DISCONNECTED
     var clickStateHotData = VpnStateData.DISCONNECTED
     var clickGuide = false
     var top_activity_vpn: String? = null
-
+    var isRefHomeAd = true
     fun setVpnStateData(vpnStateData: VpnStateData) {
         vpnStateHotData = vpnStateData
     }
@@ -125,10 +125,12 @@ object Hot {
                 it.startActivity(Intent(it, SplashActivity::class.java))
             }
         }
+        isRefHomeAd = true
         val it = backgroundTasks.iterator()
         while (it.hasNext()) {
             it.next().run()
         }
+
         needExecBackgroundTask = false
     }
 
@@ -136,13 +138,13 @@ object Hot {
         backgroundJob = GlobalScope.launch {
             delay(3000L)
             needExecBackgroundTask = true
-            Log.e("TAG", "onStop =onHotBackground: ", )
+            Log.e("TAG", "onStop =onHotBackground: ")
             ActivityUtils.finishActivity(SplashActivity::class.java)
             ActivityUtils.finishActivity(AdActivity::class.java)
         }
     }
 
-     fun isNetworkConnected(context: Context?): Boolean {
+    fun isNetworkConnected(context: Context?): Boolean {
         if (context != null) {
             val mConnectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

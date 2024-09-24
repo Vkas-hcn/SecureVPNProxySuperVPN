@@ -458,13 +458,15 @@ object UpDataUtils {
         )
         adRevenue.setAdRevenueNetwork(responseInfo?.mediationAdapterClassName)
         Adjust.trackAdRevenue(adRevenue)
-        if (!BuildConfig.DEBUG) {
-            AppEventsLogger.newLogger(MainApp.context).logPurchase(
-                (adValue.valueMicros / 1000000.0).toBigDecimal(), Currency.getInstance("USD")
-            )
-        } else {
-            Log.d("TBA", "purchase打点--value=${adValue.valueMicros}")
+        val preference = Preference(MainApp.context)
+        val bean = AdUtils.getLjData(preference)
+        Log.e("TAG", "initFaceBook-AppEventsLogger: ${bean.hhh_ss}")
+        if (bean.hhh_ss == null || bean.hhh_ss.isBlank()) {
+            return
         }
+        AppEventsLogger.newLogger(MainApp.context).logPurchase(
+            (adValue.valueMicros / 1000000.0).toBigDecimal(), Currency.getInstance("USD")
+        )
     }
 
     fun haveRefData(context: Context) {

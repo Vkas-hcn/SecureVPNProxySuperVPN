@@ -32,6 +32,7 @@ data class AdLjBean(
     val aaa_zz:String,
     val ccc_kk: String,
     val rrr_ll: String,
+    val hhh_ss:String,
 )
 
 @Keep
