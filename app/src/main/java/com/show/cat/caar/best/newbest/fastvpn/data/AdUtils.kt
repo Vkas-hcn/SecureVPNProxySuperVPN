@@ -86,7 +86,7 @@ object AdUtils {
     fun getAdBlackData(preference: Preference): Boolean {
         val state = when (getLjData(preference).ccc_kk) {
             "1" -> {
-                true
+                preference.getStringpreference(KeyAppFun.cloak_data) != "grady"
             }
 
             "2" -> {
@@ -137,7 +137,8 @@ object AdUtils {
         ))
                 || (data.nm == "1" && referrer.contains("%7B%22", true))
                 || (data.io == "1" && referrer.contains("adjust", true))
-                || (data.we == "1" && referrer.contains("bytedance", true))
+                || (data.ty == "1" && referrer.contains("bytedance", true))
+                || (data.we == "1" && referrer.contains("organic", true))
     }
 
     fun blockAdUsers(): Boolean {

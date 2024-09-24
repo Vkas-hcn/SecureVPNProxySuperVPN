@@ -1,6 +1,7 @@
 package de.blinkt.openvpn.core
 
 import android.net.VpnService
+import android.util.Log
 import com.tencent.mmkv.MMKV
 
 object ShowVpnStateUtils {
@@ -10,6 +11,7 @@ object ShowVpnStateUtils {
 
     private fun getFlowData(): Boolean {
         val data = mmkv.decodeBool("easy_vpn_flow_data", true)
+        Log.e("TAG", "getFlowData: ==${data}", )
         return data
     }
 

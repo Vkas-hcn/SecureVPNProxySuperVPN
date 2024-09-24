@@ -14,6 +14,7 @@ data class VpnAdBean(
     val ba_easy: List<AdEasy>,
 
     )
+
 @Keep
 data class AdEasy(
     val easy_isd: String,
@@ -29,10 +30,10 @@ data class AdEasy(
 
 @Keep
 data class AdLjBean(
-    val aaa_zz:String,
+    val aaa_zz: String,
     val ccc_kk: String,
     val rrr_ll: String,
-    val hhh_ss:String,
+    val hhh_ss: String,
 )
 
 @Keep
@@ -43,5 +44,6 @@ data class FlashUserBean(
     val gk: String,
     val nm: String,
     val io: String,
+    val ty: String,
     val we: String
 )

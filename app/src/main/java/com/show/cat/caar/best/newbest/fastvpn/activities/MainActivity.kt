@@ -652,6 +652,8 @@ class MainActivity : UIActivity() {
         if (!userData) {
             ad_layout?.isVisible = false
             return
+        }else{
+            postPointData("super24")
         }
         ad_layout?.isVisible = true
         if (MainApp.adManager.canShowAd(KeyAppFun.home_type) == KeyAppFun.ad_jump_over) {

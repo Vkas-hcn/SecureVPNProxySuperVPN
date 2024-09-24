@@ -46,6 +46,7 @@ object SplashFun {
                 KeyAppFun.o_me_data,
                 auth.getString(KeyAppFun.o_me_data)
             )
+            Log.e("TAG", "getFirebaseDataFun: ${auth.getString(KeyAppFun.o_me_data)}", )
             isCa = true
         }.addOnFailureListener {
             Log.e("TAG", "getFirebaseDataFun: $it")
