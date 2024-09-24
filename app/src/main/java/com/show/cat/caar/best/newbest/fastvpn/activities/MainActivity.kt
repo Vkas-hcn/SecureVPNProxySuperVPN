@@ -1,14 +1,10 @@
 package com.show.cat.caar.best.newbest.fastvpn.activities
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.ServiceConnection
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.net.VpnService
 import android.os.Build
@@ -17,7 +13,6 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.Process
-import android.os.RemoteException
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.Log
@@ -234,6 +229,13 @@ class MainActivity : UIActivity() {
         RetrofitClient.detectCountry(preference)
         cloneGuide()
         if (isHaveVpnData(preference, con_loading) {}) {
+            val bean = Hot.getCLickServiceData(this)
+            if (bean == null) {
+                Hot.initVPNSet(preference, null)
+            } else {
+                Hot.initVPNSet(preference, bean)
+                setVpnUi(bean)
+            }
             if (checkVPNPermission()) {
                 get14Per()
             } else {

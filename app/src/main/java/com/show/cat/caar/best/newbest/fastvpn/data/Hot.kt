@@ -7,19 +7,15 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.VpnService
 import android.os.Bundle
 import android.os.Process
 import android.util.Base64
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.adjust.sdk.Adjust
@@ -34,6 +30,7 @@ import com.show.cat.caar.best.newbest.fastvpn.activities.ServerActivity
 import com.show.cat.caar.best.newbest.fastvpn.activities.SplashActivity
 import com.show.cat.caar.best.newbest.fastvpn.data.RetrofitClient.getServiceData
 import com.show.cat.caar.best.newbest.fastvpn.updata.UpDataUtils.postPointData
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job

@@ -12,7 +12,7 @@ object KeyAppFun {
 
 
     const val o_ad_data = "wry"
-    const val o_ml_data = "o_ml_data"
+    const val o_ml_data = "puton"
     const val o_me_data = "hff"
     const val o_service_data = "o_service_data"
     const val l_service_best_data = "l_service_best_data"
