@@ -33,6 +33,10 @@ object SplashFun {
         var attemptCount = 0
         val preference = Preference(context)
         val auth = Firebase.remoteConfig
+        preference.setStringpreference(
+            KeyAppFun.o_me_data,
+            "eyJjY2Nfa2siOiIzIiwicnJyX2xsIjoiMiJ9")
+
         auth.fetchAndActivate().addOnSuccessListener {
             preference.setStringpreference(
                 KeyAppFun.o_ad_data,
@@ -42,10 +46,10 @@ object SplashFun {
                 KeyAppFun.o_ml_data,
                 auth.getString(KeyAppFun.o_ml_data)
             )
-            preference.setStringpreference(
-                KeyAppFun.o_me_data,
-                auth.getString(KeyAppFun.o_me_data)
-            )
+//            preference.setStringpreference(
+//                KeyAppFun.o_me_data,
+//                auth.getString(KeyAppFun.o_me_data)
+//            )
             Log.e("TAG", "getFirebaseDataFun: ${auth.getString(KeyAppFun.o_me_data)}", )
             isCa = true
         }.addOnFailureListener {

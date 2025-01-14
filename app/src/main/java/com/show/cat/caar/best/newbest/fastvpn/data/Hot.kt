@@ -45,7 +45,7 @@ enum class VpnStateData {
 }
 
 object Hot {
-    private var serviceUrl = "https://api.supervpnfreetouchvpn.com/BygQvwD/KCEPQWW/"
+    private var serviceUrl = "https://test.supervpnfreetouchvpn.com/BygQvwD/KCEPQWW/"
     var clockUrl = "https://lead.supervpnfreetouchvpn.com/scion/janitor"
     private var startedActivities = 0
     private var backgroundJob: Job? = null

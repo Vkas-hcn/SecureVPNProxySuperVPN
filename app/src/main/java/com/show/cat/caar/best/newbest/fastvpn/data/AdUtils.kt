@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.show.cat.caar.best.newbest.fastvpn.Preference
 import com.show.cat.caar.best.newbest.fastvpn.updata.UpDataUtils
 import android.content.Context
+import android.util.Log
 import com.show.cat.caar.best.newbest.fastvpn.MainApp
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -53,6 +54,7 @@ object AdUtils {
     fun getLjData(preference: Preference): AdLjBean {
         val adRefBean = preference.getStringpreference(KeyAppFun.o_me_data)
         val localAdBean = MainApp.context.loadJsonFromAssets("easy_lj.json")
+        Log.e("TAG", "getLjData: adRefBean=${adRefBean}", )
         runCatching {
             if (adRefBean.isNotEmpty()) {
                 return Gson().fromJson(base64Decode(adRefBean), AdLjBean::class.java)
@@ -144,7 +146,7 @@ object AdUtils {
     fun blockAdUsers(): Boolean {
         val preference = Preference(MainApp.context)
 
-        val data = getLjData(preference).aaa_zz
+        val data = getLjData(preference)?.aaa_zz?:""
         when (data) {
             "1" -> {
                 return true

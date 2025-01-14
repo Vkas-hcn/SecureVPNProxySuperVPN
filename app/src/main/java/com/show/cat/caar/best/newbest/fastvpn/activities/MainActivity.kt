@@ -555,7 +555,7 @@ class MainActivity : UIActivity() {
             preference.setStringpreference(KeyAppFun.tba_vpn_ip_type, clickBean.DCzDBHwKl)
             preference.setStringpreference(KeyAppFun.tba_vpn_name_type, clickBean.RLhLoQLm)
             runCatching {
-                val conf = this@MainActivity.assets.open("fast_265.ovpn")
+                val conf = this@MainActivity.assets.open("fast_ippooltest.ovpn")
                 val br = BufferedReader(InputStreamReader(conf))
                 val config = StringBuilder()
                 var line: String?
